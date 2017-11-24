@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14172137054610" configfile="/jsf_hibernate_spring_maven/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="colores.xhtml" x="122" y="178" id="pf14172166496681" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" outlinks="pf14172166496682 pf14172166496683" inlinks="pf14172166496683" path="/colores.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="empleados.xhtml" x="338" y="178" id="pf14172166496694" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14172166496682" path="/empleados.xhtml"/>
+  <links id="pf14172166496682" target="pf14172166496694" source="pf14172166496681" outcome="exito" redirect="true"/>
+  <links id="pf14172166496683" target="pf14172166496681" source="pf14172166496681" outcome="fracaso">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+</pageflow:Pageflow>

@@ -1,0 +1,233 @@
+EJEMPLOS DE ETIQUETAS DE COMPONENTES
+------------------------------------
+
+* inputText: campo de texto
+
+	<h:inputText id="name" label="Customer Name" size="50"
+	    value="#{cashier.name}"
+	    required="true"
+	     requiredMessage="#{customMessages.CustomerName}">
+	     <f:valueChangeListener
+	         type="com.sun.bookstore6.listeners.NameChanged" />
+	 </h:inputText>
+
+* outputLabel: etiqueta que acompa�a a otro componente
+
+	<h:outputLabel for="fanClub"
+	    rendered="false"
+	    binding="#{cashier.specialOfferText}"  >
+	    <h:outputText id="fanClubLabel"
+	        value="#{bundle.DukeFanClub}" />
+	</h:outputLabel>
+	
+* outputLink: hiperenlace
+
+	<h:outputLink value="javadocs">
+	    Documentation for this demo
+	</h:outputLink>
+
+* outputFormat: mensajes formateados (ref en MessageFormat del api de jse)
+
+	<h:outputFormat value="#{bundle.CartItemCount}">
+	    <f:param value="#{cart.numberOfItems}"/>
+	</h:outputFormat>
+	
+* inputSecret: campo password
+
+	<h:inputSecret redisplay="false"
+	    value="#{LoginBean.password}" />
+	    
+* commandButton: bot�n que lanza un evento action
+
+	<h:commandButton value="#{bundle.Submit}"
+	     action="#{cashier.submit}"/>
+
+* commandLink: hiperenlace que lanza un action
+
+	<h:commandLink id="NAmerica" action="bookstore"
+	     actionListener="#{localeBean.chooseLocaleFromLink}">
+	     <h:outputText value="#{bundle.English}" />
+	</h:commandLink>
+
+* dataTable: muestra datos en forma de tabla
+
+	<h:dataTable id="items"
+	    captionClass="list-caption"
+	    columnClasses="list-column-center, list-column-left,
+	         list-column-right, list-column-center"
+	    footerClass="list-footer"
+	    headerClass="list-header"
+	    rowClasses="list-row-even, list-row-odd"
+	    styleClass="list-background"
+	    summary="#{bundle.ShoppingCart}"
+	    value="#{cart.items}"
+	    var="item"
+	    first="2"
+	    rows="5">
+	    <h:column headerClass="list-header-left">
+	        <f:facet name="header">
+	            <h:outputText value="#{bundle.ItemQuantity}" />
+	        </f:facet>
+	        <h:inputText id="quantity" size="4"
+	            value="#{item.quantity}" >
+	            ...
+	        </h:inputText>
+	        ...
+	    </h:column>
+	    <h:column>
+	        <f:facet name="header">
+	            <h:outputText value="#{bundle.ItemTitle}"/>
+	        </f:facet>
+	        <h:commandLink action="#{showcart.details}">
+	            <h:outputText value="#{item.item.title}"/>
+	        </h:commandLink>
+	    </h:column>
+	    ...
+	    <f:facet name="footer"
+	        <h:panelGroup>
+	            <h:outputText value="#{bundle.Subtotal}"/>
+	            <h:outputText value="#{cart.total}" />
+	                <f:convertNumber type="currency" />
+	            </h:outputText>
+	        </h:panelGroup>
+	    </f:facet>
+	    <f:facet name="caption">
+	        <h:outputText value="#{bundle.Caption}"/>
+	    </f:facet>
+	</h:dataTable>
+
+* gráficos e imágenes:
+
+	<h:graphicImage id="mapImage" url="/template/world.jpg"
+	     alt="#{bundle.chooseLocale}" usemap="#worldMap" />
+
+* tablas:
+
+	<h:panelGrid columns="3" headerClass="list-header"
+	    rowClasses="list-row-even, list-row-odd"
+	    styleClass="list-background"
+	    title="#{bundle.Checkout}">
+	    <f:facet name="header">
+	        <h:outputText value="#{bundle.Checkout}"/>
+	    </f:facet>
+	    <h:outputText value="#{bundle.Name}" />
+	    <h:inputText id="name" size="50"
+	         value="#{cashier.name}"
+	        required="true">
+	         <f:valueChangeListener
+	             type="listeners.NameChanged" />
+	    </h:inputText>
+	    <h:message styleClass="validationMessage" for="name"/>
+	    <h:outputText value="#{bundle.CCNumber}"/>
+	    <h:inputText id="ccno" size="19"
+	        converter="CreditCardConverter" required="true">
+	         <bookstore:formatValidator
+	             formatPatterns="9999999999999999|
+	                9999 9999 9999 9999|9999-9999-9999-9999"/>
+	    </h:inputText>
+	    <h:message styleClass="validationMessage"  for="ccno"/>
+	    ...
+	</h:panelGrid>
+
+* checkbox:
+
+	<h:selectBooleanCheckbox
+	     id="fanClub"
+	    rendered="false"
+	    binding="#{cashier.specialOffer}" />
+
+*  selectOneMenu, selectOneRadio y selectOneListbox:
+
+	<h:selectOneMenu   id="shippingOption"
+	    required="true"
+	    value="#{cashier.shippingOption}">
+	    <f:selectItem
+	        itemValue="2"
+	        itemLabel="#{bundle.QuickShip}"/>
+	    <f:selectItem
+	        itemValue="5"
+	        itemLabel="#{bundle.NormalShip}"/>
+	    <f:selectItem
+	        itemValue="7"
+	        itemLabel="#{bundle.SaverShip}"/>
+	 </h:selectOneMenu>
+	 
+* selectManyCheckbox, selectManyListbox y selectManyMenu:
+
+	<h:selectManyCheckbox
+	    id="newsletters"
+	    layout="pageDirection" (o lineDirection)
+	    value="#{cashier.newsletters}">
+	    <f:selectItems
+	        value="#{newsletters}"/>
+	</h:selectManyCheckbox>
+
+* Mensajes de error:
+
+	<h:message
+	     style="color: red;
+	     font-family: ’New Century Schoolbook’, serif;
+	     font-style: oblique;
+	     text-decoration: overline" id="errors1" for="userNo"/>
+	     
+	<h:messages showSummary="true" style="color: red" />
+
+
+Mensajes
+========
+
+En faces-config.xml (primer nodo despúes del nodo raíz):
+
+	<application>
+		<resource-bundle>
+    		<base-name>resources.mensajes</base-name>
+    		<var>msg</var>
+		</resource-bundle>
+	    <message-bundle>
+	        resources.mensajesError
+	    </message-bundle>
+	    <locale-config>
+	        <default-locale>es</default-locale>
+	        <supported-locale>en</supported-locale>
+	        <supported-locale>fr</supported-locale>
+	    </locale-config>
+	</application>
+	
+Para referenciar en cualquier jsf:
+
+	<h1><h:outputText value="#{msg.presentacion}"/></h1>
+
+
+Conversores y Validadores
+=========================
+
+- Ejemplo de conversores estándar para una cifra con dos decimales y una fecha con formato mes/año:
+
+	<h:inputText id="cantidad" value="#{pago.cantidad}">
+		<f:convertNumber minFractionDigits="2"/>
+	</h:inputText>
+	
+	<h:inputText id="fecha" value="#{pago.fecha}">
+		<f:convertDateTime pattern="MM/yyyy"/>
+	</h:inputText>
+	<h:message for="fecha" />
+	
+- Ejemplo de validadores
+
+	<h:inputText value="#{gestorEmpleados.cif}" id="textCif" 
+			required="true" requiredMessage="#{msg.cifObligatorio}"/>
+
+	<h:inputText value="#{cuestionario.nombre}">
+		<f:validateLength maximum="12"/>
+	</h:inputText>
+	
+	<h:inputText value="#{regalo.cantidad}">
+		<f:validateLongRange minimum="10" maximum="10000"/>
+	</h:inputText>
+	
+	
+if(event.getPhaseId() != PhaseId.INVOKE_APPLICATION){
+        event.setPhaseId(PhaseId.INVOKE_APPLICATION);
+        event.queue();
+        return false;
+    }    

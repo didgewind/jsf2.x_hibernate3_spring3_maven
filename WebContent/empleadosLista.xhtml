@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+<h:head>
+</h:head>
+
+<h:body>
+<h1>Gestión de Empleados</h1>
+<h:form>
+<h:panelGrid columns="4">
+<h:outputText value="Cif:" />
+<h:inputText value="#{gestorEmpleadosLista.cif}" />
+<h:outputText value="Nombre:" />
+<h:inputText value="#{gestorEmpleadosLista.nombre}" />
+<h:outputText value="Apellidos:" />
+<h:inputText value="#{gestorEmpleadosLista.apellidos}" />
+<h:outputText value="Edad:" />
+<h:inputText value="#{gestorEmpleadosLista.edad}" />
+</h:panelGrid>
+<h:commandButton value="insertar" 
+	actionListener="#{gestorEmpleadosLista.insertar}" />
+<h:commandButton value="modificar" 
+	actionListener="#{gestorEmpleadosLista.modificar}" />
+<h:commandButton value="eliminar" 
+	actionListener="#{gestorEmpleadosLista.eliminar}" />
+	
+	
+<h:selectOneListbox value="#{gestorEmpleadosLista.cifSeleccionado}"
+		onclick="submit()" 
+		valueChangeListener="#{gestorEmpleadosLista.cambiaEmpleadoConCifSeleccionado}">
+	<f:selectItems value="#{gestorEmpleadosLista.empleados}"
+		var="emp" itemLabel="#{emp.apellidos}, #{emp.nombre}"
+		itemValue="#{emp.cif}" />
+</h:selectOneListbox>
+</h:form>
+</h:body>
+</html>
+
+

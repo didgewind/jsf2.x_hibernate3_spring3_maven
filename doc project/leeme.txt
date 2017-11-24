@@ -1,0 +1,33 @@
+Aplicación que integra jsf, hibernate y spring. Spring lo usamos para integrar capas, un ejemplo de aspectos,
+transacciones y seguridad. Los beans jsf están todos configurados con anotaciones. La parte de jsf (control y presentación)
+y la de hibernate (dao) están totalmente separadas, así que podríamos tener fácilmente un jsf y spring o un spring con hibernate. 
+
+- index.jsf: Es la página por defecto. Nos permite ir a las otras cuatro. Es también la página que nos desautentica
+si viajamos a ella de forma explícita (tenemos que escribir ...../index.jsf en la url)
+
+- mayusculas.jsf: página pública con un botón para pasar a mayúsculas, un validador de required, un contador de las veces que se ha pulsado
+el botón de mayúsculas y un botón para comenzar de nuevo que sólo aparece cuando ya se ha pulsado una vez al menos el botón de mayúsculas
+y que resetea el campo (si está vacío no da error de validación porque tiene immediate=true. Una consecuencia de este immediate=true es que
+la acción de resetear el campo hay que hacerla a través del componente - ver método recomenzar() de MayusBean).
+
+- colores.jsf: página reservada a los roles user y administrador. Cuando pulsas uno de los colores el texto
+(inicialmente oculto) cambia al color elegido. Pulsando el check se muestra el color. El hiperenlace
+Gestionar empleados sólo funciona cuando se ha elegido otro color al menos una vez y el texto se está
+mostrando (la validación la estamos haciendo en el propio método navega()).
+
+- empleados.jsf: página protegida para el administrador con un botón de listar que muestra los empleados del
+daoFake (inyectado con anotaciones) en un dataTable
+
+- empleadosLista.jsf: ídem, esta vez tiramos de una clase de negocio configurada con spring a la que le podemos inyectar el daoFake o el HB.
+Podemos modificar, eliminar o insertar nuevos empleados (existen constraints de empleados con otros empleados, así que mejor eliminar un empleado
+que hayamos insertado previamente)
+
+- La clase de negocio se responsabiliza de las transacciones (declarativas por Spring). El método insertaEmpleadoYEvento se puede
+utilizar para mostrar los diferentes atributos transaccionales.
+
+- Tenemos también un aspecto configurado con un advice before y otro after-returning que imprimen mensajes en la consola sobre qué método
+se va a ejecutar y cuál se acaba de ejecutar. Hay dos pointcut definidos, uno que actúa sobre todos los métodos del paquete daos y otro
+sobre todas las clases del paquete profe.empleados y sus subpaquetes. En la línea 60 del applicationContext.xml elegimos daoMethods o
+allMethods según queramos.
+
+/j_spring_security_logout
