@@ -1,6 +1,9 @@
 Aplicación que integra jsf, hibernate y spring. Spring lo usamos para integrar capas, un ejemplo de aspectos,
 transacciones y seguridad. Los beans jsf están todos configurados con anotaciones. La parte de jsf (control y presentación)
-y la de hibernate (dao) están totalmente separadas, así que podríamos tener fácilmente un jsf y spring o un spring con hibernate. 
+y la de hibernate (dao) están totalmente separadas, así que podríamos tener fácilmente un jsf y spring o un spring con hibernate.
+
+Originalmente utilizaba un tomcat integrado con eclipse pero además tiene un plugin maven para desplegarlo
+en un tomcat externo (ver al final).
 
 - index.jsf: Es la página por defecto. Nos permite ir a las otras cuatro. Es también la página que nos desautentica
 si viajamos a ella de forma explícita (tenemos que escribir ...../index.jsf en la url)
@@ -31,3 +34,24 @@ sobre todas las clases del paquete profe.empleados y sus subpaquetes. En la lín
 allMethods según queramos.
 
 /j_spring_security_logout
+
+PASOS PARA DESPLEGAR EN UN TOMCAT EXTERNO
+=========================================
+
+Está bastante bien explicado en https://www.mkyong.com/maven/how-to-deploy-maven-based-war-file-to-tomcat/
+
+Lo más importante es que .m2/settings.xml debe estar completo, es decir, tiene que tener todos los
+elementos (aunque estén vacíos). Hay un fichero de ejemplo en doc project. Este fichero define
+el id del servidor tomcat, el usuario y el password.
+
+Este usuario debe tener el role manager-script en tomcat-users.xml.
+
+Además hay que añadir el plugin tomcat7-maven-plugin (mirar el pom.xml) y configurarlo. El elemento
+<server> tiene que coincidir con el <server><id> del settings.xml.
+
+Ahora definimos una runtime configuration de maven con el base directory el proyecto actual
+(pulsar workspace y elegirlo) y el goal tomcat7:deploy.
+
+Podemos también definir otras configuraciones (tomcat7:undeploy o tomcat7:redeploy, aunque
+este último no sé si es necesario).
+
