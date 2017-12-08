@@ -18,8 +18,8 @@ public class MayusBean implements Serializable {
 	private boolean botonMayPulsado;
 	private transient HtmlCommandButton botonMay;
 	
-	private String[] mensajesBoton = {"�Qu� bien que pulsas!",
-			"Pues anda que t�", "Y lo que quer�is"
+	private String[] mensajesBoton = {"¡Qué bien que pulsas!",
+			"Pues anda que tú", "Y lo que queráis"
 	};
 	
 	public MayusBean() {

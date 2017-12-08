@@ -10,7 +10,7 @@ import profe.empleados.model.Evento;
 import profe.empleados.model.Nomina;
 
 /**
- * Implementación de DAOEmpleados que trabaja en memoria
+ * ImplementaciÃ³n de DAOEmpleados que trabaja en memoria
  * @author Administrador
  *
  */
@@ -21,8 +21,8 @@ public class DAOEmpFake implements DAOEmpleados {
 	
 	public DAOEmpFake() {
 		mpEmpleados.put("2389471290H", new Empleado("2389471290H", "Luis", "Pascual", 32));
-		mpEmpleados.put("3045893409Y", new Empleado("3045893409Y", "Begoña", "García", 1));
-		mpEmpleados.put("0938573904T", new Empleado("0938573904T", "Javier", "López", 1));
+		mpEmpleados.put("3045893409Y", new Empleado("3045893409Y", "BegoÃ±a", "GarcÃ­a", 1));
+		mpEmpleados.put("0938573904T", new Empleado("0938573904T", "Javier", "LÃ³pez", 1));
 		mpEmpleados.put("9234873942U", new Empleado("9234873942U", "Antonio", "Boniato", 11));
 	}
 	

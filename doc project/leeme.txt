@@ -55,3 +55,5 @@ Ahora definimos una runtime configuration de maven con el base directory el proy
 Podemos también definir otras configuraciones (tomcat7:undeploy o tomcat7:redeploy, aunque
 este último no sé si es necesario).
 
+Para desplegar por teclado pulsar Shift + Alt + X y luego M (parece que Q en vez de M runs ant)
+
